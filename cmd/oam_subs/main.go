@@ -167,7 +167,7 @@ func main() {
 		args.Options.DiscoveredNames = true
 		args.Options.ASNTableSummary = true
 	}
-	if !args.Options.DiscoveredNames && !args.Options.ASNTableSummary {
+	if !args.Options.DiscoveredNames && !args.Options.ASNTableSummary && (!args.Options.IPv4 || !args.Options.IPv6) {
 		usage()
 		return
 	}
@@ -236,7 +236,7 @@ func showData(args *dbArgs, asninfo bool, db *netmap.Graph) {
 			ips = " " + ips
 		}
 
-		if args.Options.DiscoveredNames {
+		if args.Options.DiscoveredNames || args.Options.IPv4 || args.Options.IPv6 {
 			var written bool
 			if outfile != nil {
 				fmt.Fprintf(outfile, "%s%s\n", name, ips)
